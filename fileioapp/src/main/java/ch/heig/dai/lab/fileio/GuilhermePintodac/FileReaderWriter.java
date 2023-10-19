@@ -18,9 +18,10 @@ public class FileReaderWriter {
             String line;
 
             while ((line = reader.readLine()) != null) {
-                resultString.append(line).append("\r\n");
+                resultString.append(line).append("\n");
             }
 
+            resultString.deleteCharAt(resultString.length() - 1);
             reader.close();
             return resultString.toString();
 
