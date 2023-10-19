@@ -1,15 +1,13 @@
 package ch.heig.dai.lab.fileio;
 
 import java.io.File;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 
 // *** TODO: Change this to import your own package ***
-import ch.heig.dai.lab.fileio.mvitoriacoliveira.*;
+import ch.heig.dai.lab.fileio.jehrensb.*;
 
 public class Main {
     // *** TODO: Change this to your own name ***
-    private static final String newName = "mvitoriacoliveira";
+    private static final String newName = "Jean-Claude Van Damme";
 
     /**
      * Main method to transform files in a folder.
@@ -37,9 +35,10 @@ public class Main {
 
         while (true) {
             try {
+                // TODO: loop over all files
 
             } catch (Exception e) {
-                System.out.println("Exception:" + e);
+                System.out.println("Exception: " + e);
             }
         }
     }
