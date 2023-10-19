@@ -20,7 +20,7 @@ public class FileReaderWriter {
         StringBuilder content = new StringBuilder();
 
         try(BufferedReader is = new BufferedReader(new InputStreamReader( 
-            new FileInputStream(file.getName()), encoding))){
+            new FileInputStream(file), encoding))){
             
             String currentLine;            
             while((currentLine = is.readLine()) != null){
