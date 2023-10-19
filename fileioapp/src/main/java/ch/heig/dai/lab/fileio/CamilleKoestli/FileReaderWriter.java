@@ -21,6 +21,7 @@ public class FileReaderWriter {
             while ((line = reader.readLine()) != null) {
                 content.append(line).append("\n");
             }
+            content.deleteCharAt(content.length() - 1);
             return content.toString();
         } catch (IOException e) {
             e.printStackTrace();
