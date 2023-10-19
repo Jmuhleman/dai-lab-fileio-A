@@ -67,7 +67,10 @@ public class Transformer {
             if(wordCounter == numWordsPerLine){
                 //add the line number and content in the result buffer
                 intermediate = source.substring(newLineStart,i);
-                result.append(lineNumber + ". " + intermediate + "\n");
+                if (!intermediate.isEmpty()) {
+                    result.append(lineNumber + ". " + intermediate);
+                    result.append("\n");
+                }
 
                 wordCounter = 0;
                 //set de beginning of the next line to the next character (skip the space)

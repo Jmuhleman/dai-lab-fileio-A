@@ -5,30 +5,51 @@ import java.nio.charset.Charset;
 
 public class FileReaderWriter {
 
-    /**
-     * Read the content of a file with a given encoding.
-     * @param file the file to read. 
-     * @param encoding
-     * @return the content of the file as a String, or null if an error occurred.
-     */
-    public String readFile(File file, Charset encoding) {
-        // TODO: Implement the method body here. 
-        // Use the ...Stream and ...Reader classes from the java.io package.
-        // Make sure to close the streams and readers at the end.
-        return null;
-    }
+	/**
+	 * Read the content of a file with a given encoding.
+	 * 
+	 * @param file     the file to read.
+	 * @param encoding
+	 * @return the content of the file as a String, or null if an error occurred.
+	 */
+	public String readFile(File file, Charset encoding) {
+		try (BufferedReader reader = new BufferedReader(
+				new InputStreamReader(
+						new FileInputStream(file.getAbsolutePath()),
+						encoding))) {
+			String content = "";
+			String line;
+			while ((line = reader.readLine()) != null) {
+				content += line + "\n";
+			}
+			content = content.substring(0, content.length() - 1);
+			reader.close();
+			return content.toString();
+		} catch (IOException e) {
+			System.out.println("Exception: " + e);
+		}
+		return null;
+	}
 
-    /**
-     * Write the content to a file with a given encoding. 
-     * @param file the file to write to
-     * @param content the content to write
-     * @param encoding the encoding to use
-     * @return true if the file was written successfully, false otherwise
-     */
-    public boolean writeFile(File file, String content, Charset encoding) {
-        // TODO: Implement the method body here. 
-        // Use the ...Stream and ...Reader classes from the java.io package.
-        // Make sure to flush the data and close the streams and readers at the end.
-        return false;
-    }
+	/**
+	 * Write the content to a file with a given encoding.
+	 * 
+	 * @param file     the file to write to
+	 * @param content  the content to write
+	 * @param encoding the encoding to use
+	 * @return true if the file was written successfully, false otherwise
+	 */
+	public boolean writeFile(File file, String content, Charset encoding) {
+		try (BufferedWriter writer = new BufferedWriter(
+				new OutputStreamWriter(
+						new FileOutputStream(file.getAbsolutePath()),
+						encoding))) {
+			writer.write(content);
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			System.out.println("Exception: " + e);
+		}
+		return false;
+	}
 }

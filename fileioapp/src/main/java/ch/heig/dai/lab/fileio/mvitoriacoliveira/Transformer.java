@@ -24,6 +24,9 @@ public class Transformer {
      */
     public String replaceChuck(String source) {
         // TODO: Implement the method body here.
+        if(!source.isEmpty()) {
+            return source.replaceAll("Chuck Norris", newName);
+        }
         return "";
     }
 
@@ -34,6 +37,15 @@ public class Transformer {
      */
     public String capitalizeWords(String source) {
         // TODO: Implement the method body here.
+        if(!source.isEmpty()) {
+            String[] words = source.split(" ");
+            StringBuilder capitalizedWords = new StringBuilder();
+
+            for (String word : words) {
+                capitalizedWords.append(word.substring(0, 1).toUpperCase()).append(word.substring(1)).append(" ");
+            }
+            return capitalizedWords.toString().trim();
+        }
         return "";
     }
 
@@ -46,6 +58,29 @@ public class Transformer {
     public String wrapAndNumberLines(String source) {
         // TODO: Implement the method body here.
         // Use the StringBuilder class to build the result string.
+        if(!source.isEmpty() & numWordsPerLine != 0) {
+            String[] words = source.split(" ");
+
+            StringBuilder result = new StringBuilder();
+            int wordsCounter = 0;
+            int lineNb = 0;
+
+            for(String word : words){
+                if(wordsCounter % numWordsPerLine == 0){
+                    if(lineNb != 0){
+                        //Replaces last blank space of a line with a line break.
+                        result.replace(result.length() - 1, result.length(), "\n");
+                    }
+                    result.append(++lineNb).append(". ");
+                }
+                result.append(word).append(" ");
+                ++wordsCounter;
+            }
+            // Replaces very last blank space with a line break.
+            result.replace(result.length() - 1, result.length(), "\n");
+
+            return result.toString();
+        }
         return "";
     }
 }   

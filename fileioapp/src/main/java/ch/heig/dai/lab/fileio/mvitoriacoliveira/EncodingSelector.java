@@ -3,6 +3,8 @@ package ch.heig.dai.lab.fileio.mvitoriacoliveira;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.TreeMap;
+import java.util.SortedMap;
 
 public class EncodingSelector {
 
@@ -21,10 +23,19 @@ public class EncodingSelector {
         // TODO: implement the method body here
         String fileName = file.getName().toLowerCase();
 
-        if(fileName.endsWith(".utf8")){ return StandardCharsets.UTF_8; }
-        else if (fileName.endsWith(".txt")) { return StandardCharsets.US_ASCII; }
-        else if (fileName.endsWith(".utf16be")) { return StandardCharsets.UTF_16BE; }
-        else if (fileName.endsWith(".utf16le")){ return StandardCharsets.UTF_16LE; }
-        else { return null; }
+        // Map where file extensions (as keys) are associated with their corresponding character encodings.
+        SortedMap<String, Charset> extensionCharsetMap = new TreeMap<>();
+
+        extensionCharsetMap.put("utf8", StandardCharsets.UTF_8);
+        extensionCharsetMap.put("txt", StandardCharsets.US_ASCII);
+        extensionCharsetMap.put("utf16be", StandardCharsets.UTF_16BE);
+        extensionCharsetMap.put("utf16le", StandardCharsets.UTF_16LE);
+
+        for(String extension : extensionCharsetMap.keySet()){
+            if(fileName.endsWith(extension)){
+                return extensionCharsetMap.get(extension);
+            }
+        }
+        return null;
     }
 }

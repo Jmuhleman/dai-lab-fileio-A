@@ -18,10 +18,11 @@ public class FileReaderWriter {
         // Make sure to close the streams and readers at the end.
         StringBuilder readString = new StringBuilder();
         try {
-            var is = new BufferedReader(new InputStreamReader(new FileInputStream(file.getName()), encoding));
+            var is = new BufferedReader(new InputStreamReader(new FileInputStream(file.getAbsolutePath()), encoding));
 
-            while(is.readLine() != null){
-                readString.append(is.readLine()).append("\n");
+            String read;
+            while((read = is.readLine()) != null){
+                readString.append(read).append("\n");
             }
 
             is.close();
@@ -47,7 +48,7 @@ public class FileReaderWriter {
         // Make sure to flush the data and close the streams and readers at the end.
 
         try {
-            var os = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file.getName()), encoding));
+            var os = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file.getAbsolutePath()), encoding));
 
             os.write(content);
 
