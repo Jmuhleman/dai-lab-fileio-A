@@ -35,35 +35,8 @@ public class Main {
         System.out.println("Application started, reading folder " + folder + "...");
         // TODO: implement the main method here
 
-        String PROCESSED_FILE_SUFFIXE = ".processed";
-        FileExplorer currentFolder = new FileExplorer(folder);
-        EncodingSelector encodingSelector = new EncodingSelector();
-        FileReaderWriter mainReaderWriter = new FileReaderWriter();
-        Transformer fileTransformer = new Transformer(newName, wordsPerLine);
-
         while (true) {
             try {
-                // Get a new file from the FileExplorer,
-                File currentFile = currentFolder.getNewFile();
-                if(currentFile == null) break;
-
-                // Determine its encoding with the EncodingSelector
-                Charset currentFileEncoding = encodingSelector.getEncoding(currentFile);
-                if(currentFileEncoding == null) continue;
-
-                // Read the file with the FileReaderWriter
-                String currentFileContent = mainReaderWriter.readFile(currentFile, currentFileEncoding);
-                if(currentFileContent == null) continue;
-
-                // Transform the content with the Transformer
-                String wrappedAndNumberedText = fileTransformer.wrapAndNumberLines(
-                        fileTransformer.capitalizeWords(fileTransformer.replaceChuck(currentFileContent)));
-
-                // Write the result with the FileReaderWriter
-                // Set new file name: <inputFileName>.<inputFileEncoding> + ".processed"
-                // Result files are written in the same folder as the input files, and encoded with UTF8.
-                File processedFile = new File(currentFile.getAbsolutePath() + PROCESSED_FILE_SUFFIXE);
-                mainReaderWriter.writeFile(processedFile, wrappedAndNumberedText, StandardCharsets.UTF_8);
 
             } catch (Exception e) {
                 System.out.println("Exception:" + e);
